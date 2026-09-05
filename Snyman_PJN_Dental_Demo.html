@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0d5d58" />
+  <meta name="description" content="Unofficial website concept for Dr PJN Snyman dental practice in Eloffsdal, Pretoria. Demo by Nova J Systems." />
+  <title>Dr PJN Snyman | Dental Practice — Demo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --ink: #12312f;
+      --ink-soft: #496562;
+      --brand: #0d6b65;
+      --brand-deep: #084b47;
+      --brand-light: #dff3ef;
+      --mint: #edf8f5;
+      --cream: #fbfaf6;
+      --white: #ffffff;
+      --line: rgba(18, 49, 47, 0.11);
+      --shadow: 0 24px 70px rgba(9, 64, 60, 0.12);
+      --shadow-soft: 0 14px 40px rgba(9, 64, 60, 0.08);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --mx: 50vw;
+      --my: 20vh;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(650px circle at var(--mx) var(--my), rgba(84, 185, 174, 0.08), transparent 46%),
+        var(--cream);
+      overflow-x: hidden;
+    }
+    body.menu-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    img { width: 100%; display: block; }
+
+    ::selection { background: #b9e8df; color: #083d39; }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: #f4f4ef; }
+    ::-webkit-scrollbar-thumb { background: #b4d6d0; border-radius: 20px; border: 2px solid #f4f4ef; }
+
+    .scroll-progress {
+      position: fixed;
+      inset: 0 auto auto 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #7cd2c4, var(--brand), #274f4b);
+      z-index: 9999;
+      box-shadow: 0 0 18px rgba(13,107,101,.55);
+    }
+
+    .demo-ribbon {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 850;
+      max-width: 310px;
+      padding: 11px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(255,255,255,.7);
+      border-radius: 15px;
+      background: rgba(12, 35, 34, .88);
+      color: #fff;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 16px 40px rgba(4, 29, 27, .22);
+      font-size: 11px;
+      line-height: 1.45;
+      letter-spacing: .02em;
+    }
+    .demo-ribbon i { color: #78d4c6; width: 18px; height: 18px; flex: 0 0 auto; }
+    .demo-ribbon b { color: #a9eee3; }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 12px;
+      border: 1px solid rgba(13,107,101,.14);
+      background: rgba(255,255,255,.72);
+      border-radius: 999px;
+      color: var(--brand-deep);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      box-shadow: 0 8px 24px rgba(11,86,80,.05);
+      backdrop-filter: blur(12px);
+    }
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #32b8a8;
+      box-shadow: 0 0 0 6px rgba(50,184,168,.13);
+    }
+
+    h1, h2, h3 { margin: 0; }
+    .display {
+      font-family: "DM Serif Display", serif;
+      font-weight: 400;
+      letter-spacing: -.035em;
+    }
+    .section-title {
+      font-family: "DM Serif Display", serif;
+      font-size: clamp(40px, 5vw, 66px);
+      line-height: .98;
+      font-weight: 400;
+      letter-spacing: -.035em;
+    }
+    .section-copy {
+      max-width: 650px;
+      color: var(--ink-soft);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 900;
+      padding: 18px 0;
+      transition: .35s ease;
+    }
+    nav.scrolled { padding: 10px 0; }
+    .nav-shell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 10px 11px 10px 18px;
+      border: 1px solid rgba(255,255,255,.72);
+      border-radius: 22px;
+      background: rgba(251,250,246,.70);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 14px 40px rgba(8,62,58,.06);
+      transition: .35s ease;
+    }
+    nav.scrolled .nav-shell { box-shadow: 0 18px 46px rgba(8,62,58,.10); }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(145deg, #147e76, #084e49);
+      box-shadow: 0 12px 26px rgba(13,107,101,.25);
+      flex: 0 0 auto;
+    }
+    .brand-mark i { width: 22px; height: 22px; }
+    .brand-name { font-weight: 800; font-size: 14px; line-height: 1.15; }
+    .brand-sub { color: #718783; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .13em; margin-top: 3px; }
+    .nav-links { display: flex; align-items: center; gap: 26px; }
+    .nav-links a:not(.nav-cta) {
+      position: relative;
+      font-size: 12px;
+      font-weight: 800;
+      color: #3f5c58;
+    }
+    .nav-links a:not(.nav-cta)::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -7px;
+      width: 100%;
+      height: 2px;
+      border-radius: 4px;
+      background: var(--brand);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform .3s ease;
+    }
+    .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+    .nav-cta, .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 13px 18px;
+      border: 0;
+      border-radius: 14px;
+      color: #fff;
+      background: linear-gradient(130deg, #0d7069, #064943);
+      font-weight: 800;
+      font-size: 12px;
+      cursor: pointer;
+      box-shadow: 0 13px 28px rgba(13,107,101,.22);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .nav-cta:hover, .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 17px 32px rgba(13,107,101,.28); }
+    .mobile-toggle { display: none; width: 42px; height: 42px; border: 0; background: #eef6f4; color: var(--brand-deep); border-radius: 13px; cursor: pointer; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      padding: 145px 0 78px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      top: -200px;
+      left: -180px;
+      background: radial-gradient(circle, rgba(120,220,204,.23), transparent 68%);
+      filter: blur(8px);
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      align-items: center;
+      gap: 72px;
+    }
+    .hero-copy h1 {
+      max-width: 700px;
+      margin: 24px 0 24px;
+      font-family: "DM Serif Display", serif;
+      font-weight: 400;
+      font-size: clamp(58px, 7vw, 92px);
+      line-height: .91;
+      letter-spacing: -.045em;
+    }
+    .hero-copy h1 em { color: var(--brand); font-weight: 400; }
+    .hero-lead {
+      max-width: 620px;
+      margin: 0 0 30px;
+      color: #526c68;
+      font-size: 17px;
+      line-height: 1.78;
+    }
+    .hero-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .btn-primary { padding: 15px 22px; font-size: 13px; }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 14px 20px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,.72);
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+      transition: .25s ease;
+    }
+    .btn-secondary:hover { background: #fff; transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+    .hero-mini {
+      margin-top: 34px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: #6c827f;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .hero-mini span { display: inline-flex; align-items: center; gap: 7px; }
+    .hero-mini i { width: 16px; height: 16px; color: var(--brand); }
+
+    .hero-visual {
+      position: relative;
+      min-height: 590px;
+    }
+    .hero-image-main {
+      position: absolute;
+      right: 0;
+      top: 20px;
+      width: 88%;
+      height: 520px;
+      object-fit: cover;
+      border-radius: 42px 42px 42px 110px;
+      box-shadow: var(--shadow);
+      transition: transform .16s linear;
+    }
+    .hero-image-small {
+      position: absolute;
+      left: 0;
+      bottom: 10px;
+      width: 42%;
+      height: 220px;
+      object-fit: cover;
+      border: 8px solid var(--cream);
+      border-radius: 30px;
+      box-shadow: 0 18px 42px rgba(9,64,60,.16);
+      z-index: 3;
+    }
+    .hero-card {
+      position: absolute;
+      z-index: 4;
+      right: -14px;
+      bottom: 2px;
+      width: 245px;
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.84);
+      border: 1px solid rgba(255,255,255,.8);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow-soft);
+      animation: float 5s ease-in-out infinite;
+    }
+    .hero-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .hero-card-stars { display: flex; gap: 2px; color: #d6a73c; }
+    .hero-card-stars i { width: 14px; height: 14px; fill: currentColor; }
+    .hero-card strong { display: block; font-size: 31px; letter-spacing: -.04em; }
+    .hero-card p { margin: 3px 0 0; color: #69817e; font-size: 11px; line-height: 1.5; }
+    .floating-tooth {
+      position: absolute;
+      top: 2px;
+      left: 22px;
+      width: 72px;
+      height: 72px;
+      display: grid;
+      place-items: center;
+      border-radius: 24px;
+      color: #0f7c74;
+      background: rgba(226,247,242,.92);
+      border: 1px solid rgba(13,107,101,.1);
+      box-shadow: var(--shadow-soft);
+      transform: rotate(-9deg);
+      animation: bob 4.3s ease-in-out infinite;
+      z-index: 4;
+    }
+    .floating-tooth i { width: 32px; height: 32px; }
+
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    @keyframes bob { 0%,100% { transform: rotate(-9deg) translateY(0); } 50% { transform: rotate(-2deg) translateY(-11px); } }
+
+    /* MARQUEE */
+    .trust-strip {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.46);
+      overflow: hidden;
+    }
+    .marquee { display: flex; width: max-content; animation: marquee 26s linear infinite; }
+    .marquee-track { display: flex; align-items: center; gap: 42px; padding: 17px 21px; }
+    .marquee-item { display: inline-flex; align-items: center; gap: 10px; color: #5a736f; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .13em; white-space: nowrap; }
+    .marquee-item i { width: 17px; height: 17px; color: var(--brand); }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* SECTIONS */
+    section { position: relative; }
+    .section-pad { padding: 118px 0; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 54px; }
+    .section-head .section-copy { margin: 0; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: .94fr 1.06fr; gap: 74px; align-items: center; }
+    .image-panel { position: relative; }
+    .image-panel img { height: 620px; object-fit: cover; border-radius: 36px; box-shadow: var(--shadow); }
+    .image-panel::after {
+      content: "";
+      position: absolute;
+      inset: 20px -18px -18px 24px;
+      z-index: -1;
+      border-radius: 36px;
+      border: 1px solid rgba(13,107,101,.17);
+    }
+    .about-content .section-title { margin: 18px 0 24px; }
+    .about-content p { color: var(--ink-soft); font-size: 15px; line-height: 1.85; }
+    .about-facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; margin-top: 30px; }
+    .fact {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.62);
+      transition: .3s ease;
+    }
+    .fact:hover { transform: translateY(-3px); background: #fff; box-shadow: var(--shadow-soft); }
+    .fact i { width: 19px; height: 19px; color: var(--brand); margin-bottom: 13px; }
+    .fact b { display: block; font-size: 13px; }
+    .fact span { display: block; color: #738884; margin-top: 4px; font-size: 11px; line-height: 1.45; }
+
+    /* MENTIONS */
+    .mentions { background: #0d302d; color: white; overflow: hidden; }
+    .mentions::before {
+      content: "";
+      position: absolute;
+      inset: -160px -120px auto auto;
+      width: 460px;
+      height: 460px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(88,204,188,.18), transparent 67%);
+    }
+    .mentions .eyebrow { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.11); color: #b8eee6; }
+    .mentions .section-copy { color: #a9c0bd; }
+    .mentions-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 48px; }
+    .mention-card {
+      min-height: 235px;
+      padding: 26px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.025));
+      backdrop-filter: blur(12px);
+      transition: transform .3s ease, border-color .3s ease, background .3s ease;
+    }
+    .mention-card:hover { transform: translateY(-8px); border-color: rgba(116,227,212,.32); background: rgba(255,255,255,.09); }
+    .mention-icon { width: 48px; height: 48px; border-radius: 15px; display: grid; place-items: center; background: rgba(114,221,207,.10); color: #7edbcc; margin-bottom: 34px; }
+    .mention-icon i { width: 23px; height: 23px; }
+    .mention-card h3 { font-size: 16px; }
+    .mention-card p { margin: 10px 0 0; color: #9ab2af; font-size: 12px; line-height: 1.65; }
+    .source-note { margin-top: 22px; color: #849d99; font-size: 10px; line-height: 1.6; }
+
+    /* EXPERIENCE */
+    .experience-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .experience-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 470px;
+      border-radius: 30px;
+      box-shadow: var(--shadow-soft);
+    }
+    .experience-card img { position: absolute; inset: 0; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+    .experience-card:hover img { transform: scale(1.055); }
+    .experience-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,31,29,.84), rgba(5,31,29,.08) 65%); }
+    .experience-copy { position: absolute; z-index: 2; left: 28px; right: 28px; bottom: 28px; color: #fff; }
+    .experience-copy span { color: #b7e8e0; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .15em; }
+    .experience-copy h3 { margin-top: 8px; font-family: "DM Serif Display", serif; font-size: 36px; font-weight: 400; line-height: 1; }
+    .experience-copy p { max-width: 480px; color: #c6d5d2; font-size: 12px; line-height: 1.6; }
+
+    /* REVIEWS */
+    .review-layout { display: grid; grid-template-columns: .78fr 1.22fr; gap: 42px; align-items: stretch; }
+    .review-score {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 38px;
+      border-radius: 30px;
+      background: linear-gradient(145deg, #e9f7f3, #f8fbfa);
+      border: 1px solid rgba(13,107,101,.10);
+    }
+    .score-num { font-family: "DM Serif Display", serif; font-size: 104px; line-height: .9; letter-spacing: -.05em; color: var(--brand-deep); }
+    .score-stars { display: flex; color: #d6a73c; gap: 5px; margin: 18px 0 12px; }
+    .score-stars i { width: 18px; height: 18px; fill: currentColor; }
+    .review-score p { color: #667f7b; font-size: 12px; line-height: 1.7; }
+    .review-stack { display: grid; gap: 14px; }
+    .review-card {
+      padding: 28px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 30px rgba(12,74,69,.045);
+      transition: .3s ease;
+    }
+    .review-card:hover { transform: translateX(6px); box-shadow: var(--shadow-soft); }
+    .review-card .quote { font-family: "DM Serif Display", serif; font-size: 25px; line-height: 1.22; }
+    .review-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 20px; color: #788d89; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .11em; }
+    .review-meta .stars { display: flex; color: #d6a73c; gap: 2px; }
+    .review-meta .stars i { width: 12px; height: 12px; fill: currentColor; }
+
+    /* CTA */
+    .cta-shell {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 40px;
+      align-items: center;
+      padding: 58px;
+      border-radius: 36px;
+      background: linear-gradient(135deg, #0d6c65, #083f3c);
+      color: #fff;
+      box-shadow: 0 30px 70px rgba(5,61,57,.22);
+    }
+    .cta-shell::after { content: ""; position: absolute; width: 380px; height: 380px; border-radius: 50%; right: -120px; top: -170px; background: rgba(119,226,211,.13); }
+    .cta-shell h2 { font-family: "DM Serif Display", serif; font-size: clamp(42px, 5vw, 65px); line-height: .95; font-weight: 400; letter-spacing: -.035em; }
+    .cta-shell p { max-width: 600px; color: #c2dcd8; line-height: 1.75; font-size: 13px; }
+    .cta-actions { position: relative; z-index: 2; display: flex; justify-content: flex-end; gap: 12px; flex-wrap: wrap; }
+    .cta-shell .btn-primary { background: #fff; color: #0b5c56; box-shadow: none; }
+    .cta-shell .btn-primary:hover { box-shadow: 0 12px 30px rgba(0,0,0,.16); }
+    .cta-shell .btn-secondary { border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.08); color: #fff; }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; }
+    .contact-card, .map-card { border-radius: 30px; overflow: hidden; border: 1px solid var(--line); background: rgba(255,255,255,.72); box-shadow: var(--shadow-soft); }
+    .contact-card { padding: 36px; }
+    .contact-card h3 { font-family: "DM Serif Display", serif; font-size: 40px; font-weight: 400; }
+    .contact-card > p { color: #667f7b; font-size: 12px; line-height: 1.7; }
+    .contact-list { display: grid; gap: 12px; margin: 28px 0; }
+    .contact-item { display: flex; align-items: flex-start; gap: 13px; padding: 15px; border-radius: 16px; background: #f7fbfa; }
+    .contact-item i { width: 20px; height: 20px; color: var(--brand); flex: 0 0 auto; margin-top: 1px; }
+    .contact-item b { display: block; font-size: 12px; }
+    .contact-item span { display: block; margin-top: 3px; color: #6e8581; font-size: 11px; line-height: 1.5; }
+    .contact-form { display: grid; gap: 11px; margin-top: 22px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      border: 1px solid rgba(18,49,47,.12);
+      outline: none;
+      padding: 14px 15px;
+      border-radius: 14px;
+      background: #fff;
+      color: var(--ink);
+      transition: border-color .25s ease, box-shadow .25s ease;
+      font-size: 12px;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: rgba(13,107,101,.55); box-shadow: 0 0 0 4px rgba(13,107,101,.08); }
+    .contact-form textarea { min-height: 100px; resize: vertical; }
+    .contact-form small { color: #80938f; font-size: 9px; line-height: 1.55; }
+    .map-card { min-height: 650px; position: relative; }
+    .map-card iframe { width: 100%; height: 100%; min-height: 650px; border: 0; filter: saturate(.82) contrast(.94); }
+    .map-label {
+      position: absolute;
+      left: 20px;
+      bottom: 20px;
+      right: 20px;
+      padding: 15px 16px;
+      border-radius: 17px;
+      color: #fff;
+      background: rgba(9,49,46,.90);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 15px 35px rgba(0,0,0,.18);
+    }
+    .map-label b { font-size: 12px; }
+    .map-label span { display: block; color: #bbd4d0; font-size: 10px; margin-top: 3px; }
+
+    /* FAQ */
+    .faq { max-width: 860px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 22px 0; border: 0; background: transparent; color: var(--ink); text-align: left; cursor: pointer; font-weight: 800; font-size: 14px; }
+    .faq-btn i { width: 18px; height: 18px; color: var(--brand); transition: transform .3s ease; }
+    .faq-item.open .faq-btn i { transform: rotate(45deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .45s ease; }
+    .faq-answer p { margin: 0 0 22px; color: #627b77; font-size: 12px; line-height: 1.75; }
+
+    /* FOOTER */
+    footer { padding: 52px 0 30px; color: #8ba09c; background: #092e2b; }
+    .footer-grid { display: flex; justify-content: space-between; gap: 32px; align-items: end; padding-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .footer-brand { color: #fff; }
+    .footer-brand .brand-sub { color: #78928e; }
+    .footer-copy { max-width: 440px; margin-top: 16px; font-size: 11px; line-height: 1.7; }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; font-size: 11px; font-weight: 700; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-top: 22px; font-size: 9px; line-height: 1.6; }
+    .nova-credit b { color: #9ee0d6; }
+
+    .call-float {
+      position: fixed;
+      left: 18px;
+      bottom: 18px;
+      z-index: 840;
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, #138177, #07514b);
+      border-radius: 19px;
+      box-shadow: 0 18px 40px rgba(8,81,75,.28);
+      transition: .3s ease;
+    }
+    .call-float:hover { transform: translateY(-5px) rotate(-3deg); }
+    .call-float i { width: 24px; height: 24px; }
+    .call-float::after { content: ""; position: absolute; inset: -5px; border: 1px solid rgba(19,129,119,.28); border-radius: 23px; animation: pulse-ring 2s ease-out infinite; }
+    @keyframes pulse-ring { 0% { transform: scale(.8); opacity: .8; } 100% { transform: scale(1.3); opacity: 0; } }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      z-index: 1200;
+      transform: translate(-50%, 120px);
+      opacity: 0;
+      max-width: calc(100% - 30px);
+      padding: 14px 18px;
+      border-radius: 14px;
+      color: #fff;
+      background: #102d2a;
+      box-shadow: 0 18px 44px rgba(4,34,32,.25);
+      font-size: 11px;
+      font-weight: 700;
+      transition: .4s cubic-bezier(.2,.7,.2,1);
+    }
+    .toast.show { transform: translate(-50%, 0); opacity: 1; }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal.delay-1 { transition-delay: .08s; }
+    .reveal.delay-2 { transition-delay: .16s; }
+    .reveal.delay-3 { transition-delay: .24s; }
+
+    @media (max-width: 980px) {
+      .nav-links { display: none; }
+      .mobile-toggle { display: grid; place-items: center; }
+      .nav-links.mobile-open {
+        display: flex;
+        position: fixed;
+        top: 88px;
+        left: 20px;
+        right: 20px;
+        padding: 22px;
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 22px;
+        background: rgba(250,250,246,.97);
+        backdrop-filter: blur(20px);
+        box-shadow: var(--shadow);
+        border: 1px solid var(--line);
+      }
+      .nav-links.mobile-open a { padding: 10px 2px; }
+      .hero-grid, .about-grid, .review-layout, .contact-grid, .cta-shell { grid-template-columns: 1fr; }
+      .hero-grid { gap: 30px; }
+      .hero-visual { min-height: 560px; }
+      .hero-image-main { width: 92%; }
+      .mentions-grid { grid-template-columns: repeat(2, 1fr); }
+      .section-head { align-items: flex-start; flex-direction: column; }
+      .cta-actions { justify-content: flex-start; }
+      .map-card, .map-card iframe { min-height: 500px; }
+    }
+
+    @media (max-width: 680px) {
+      .container { width: min(100% - 26px, 1180px); }
+      nav { padding-top: 10px; }
+      .brand-sub { display: none; }
+      .brand-name { font-size: 12px; }
+      .hero { padding: 120px 0 58px; }
+      .hero-copy h1 { font-size: clamp(52px, 17vw, 73px); }
+      .hero-lead { font-size: 15px; }
+      .hero-visual { min-height: 450px; }
+      .hero-image-main { height: 400px; width: 92%; border-radius: 32px 32px 32px 78px; }
+      .hero-image-small { width: 44%; height: 150px; border-width: 6px; border-radius: 22px; }
+      .hero-card { width: 195px; right: -2px; bottom: -5px; padding: 14px; }
+      .hero-card strong { font-size: 25px; }
+      .floating-tooth { width: 58px; height: 58px; left: 4px; }
+      .section-pad { padding: 82px 0; }
+      .section-title { font-size: 46px; }
+      .about-facts, .mentions-grid, .experience-grid, .field-row { grid-template-columns: 1fr; }
+      .image-panel img { height: 470px; }
+      .experience-card { min-height: 390px; }
+      .score-num { font-size: 88px; }
+      .review-card .quote { font-size: 22px; }
+      .cta-shell { padding: 34px 26px; }
+      .contact-card { padding: 25px; }
+      .demo-ribbon { right: 12px; bottom: 86px; max-width: calc(100% - 90px); font-size: 9px; }
+      .call-float { left: 12px; bottom: 14px; width: 54px; height: 54px; }
+      .footer-grid, .footer-bottom { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <div class="demo-ribbon">
+    <i data-lucide="sparkles"></i>
+    <span><b>Unofficial concept demo.</b> Created by Nova J Systems using public business information and stock imagery.</span>
+  </div>
+
+  <a class="call-float" href="tel:+27123351410" aria-label="Call Dr PJN Snyman">
+    <i data-lucide="phone-call"></i>
+  </a>
+
+  <nav id="nav">
+    <div class="container nav-shell">
+      <a class="brand" href="#home" aria-label="Dr PJN Snyman home">
+        <div class="brand-mark"><i data-lucide="badge-plus"></i></div>
+        <div>
+          <div class="brand-name">Dr PJN Snyman</div>
+          <div class="brand-sub">Dental Practice · Pretoria</div>
+        </div>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#about">Practice</a>
+        <a href="#care">Patient Care</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-cta" href="tel:+27123351410"><i data-lucide="phone"></i> Call 012 335 1410</a>
+      </div>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu"><i data-lucide="menu"></i></button>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal in">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> Eloffsdal · Pretoria</div>
+          <h1>Care for a <em>confident</em> smile.</h1>
+          <p class="hero-lead">A modern website concept for Dr PJN Snyman’s dental practice — designed to make it easier for patients to find the practice, understand the experience, and get in touch.</p>
+          <div class="hero-actions">
+            <a class="btn-primary" href="tel:+27123351410"><i data-lucide="phone-call"></i> Call the Practice</a>
+            <a class="btn-secondary" href="#contact"><i data-lucide="map-pin"></i> Get Directions</a>
+          </div>
+          <div class="hero-mini">
+            <span><i data-lucide="map-pin-check"></i> 518 Begemann St, Eloffsdal</span>
+            <span><i data-lucide="hospital"></i> Listed with Life Pretoria North Surgical Centre</span>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal in delay-1" id="heroVisual">
+          <img class="hero-image-main" id="heroMain" src="https://images.unsplash.com/photo-1777331903190-341a3dd0441b?auto=format&fit=crop&q=84&w=1600" alt="Dentist consulting with a patient in a modern dental office" />
+          <img class="hero-image-small" src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=82&w=900" alt="Modern dental treatment room" />
+          <div class="floating-tooth"><i data-lucide="sparkles"></i></div>
+          <div class="hero-card">
+            <div class="hero-card-top">
+              <div class="hero-card-stars">
+                <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+              </div>
+              <i data-lucide="quote" style="width:18px;color:#89aaa5"></i>
+            </div>
+            <strong><span id="reviewCounter">0</span></strong>
+            <p>public reviews shown on Cybo when this demo was prepared.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-strip">
+      <div class="marquee">
+        <div class="marquee-track">
+          <div class="marquee-item"><i data-lucide="shield-check"></i> Established local dental practice</div>
+          <div class="marquee-item"><i data-lucide="map-pin"></i> Eloffsdal, Pretoria</div>
+          <div class="marquee-item"><i data-lucide="star"></i> Strong public review presence</div>
+          <div class="marquee-item"><i data-lucide="phone"></i> Direct practice contact</div>
+          <div class="marquee-item"><i data-lucide="hospital"></i> Life Healthcare doctor listing</div>
+        </div>
+        <div class="marquee-track" aria-hidden="true">
+          <div class="marquee-item"><i data-lucide="shield-check"></i> Established local dental practice</div>
+          <div class="marquee-item"><i data-lucide="map-pin"></i> Eloffsdal, Pretoria</div>
+          <div class="marquee-item"><i data-lucide="star"></i> Strong public review presence</div>
+          <div class="marquee-item"><i data-lucide="phone"></i> Direct practice contact</div>
+          <div class="marquee-item"><i data-lucide="hospital"></i> Life Healthcare doctor listing</div>
+        </div>
+      </div>
+    </div>
+
+    <section class="section-pad" id="about">
+      <div class="container about-grid">
+        <div class="image-panel reveal">
+          <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=86&w=1400" alt="Bright modern dental clinic interior" loading="lazy" />
+        </div>
+        <div class="about-content reveal delay-1">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> The Practice</div>
+          <h2 class="section-title">A local practice patients already talk about.</h2>
+          <p>Dr PJN Snyman is publicly listed as a dentist in Eloffsdal, Pretoria. The practice appears across established business directories and Dr Snyman is also listed among dentists associated with Life Pretoria North Surgical Centre.</p>
+          <p>This demo turns that fragmented online information into one clear, trustworthy patient experience — while keeping the practice’s actual details front and centre.</p>
+
+          <div class="about-facts">
+            <div class="fact">
+              <i data-lucide="map-pin"></i>
+              <b>Eloffsdal, Pretoria</b>
+              <span>518 Begemann Street, 0084</span>
+            </div>
+            <div class="fact">
+              <i data-lucide="phone"></i>
+              <b>Practice Contact</b>
+              <span>012 335 1410</span>
+            </div>
+            <div class="fact">
+              <i data-lucide="star"></i>
+              <b>Public Reputation</b>
+              <span>23 reviews shown on Cybo</span>
+            </div>
+            <div class="fact">
+              <i data-lucide="hospital"></i>
+              <b>Healthcare Listing</b>
+              <span>Listed by Life Pretoria North Surgical Centre</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad mentions" id="care">
+      <div class="container">
+        <div class="section-head">
+          <div class="reveal">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> What patients mention</div>
+            <h2 class="section-title" style="margin-top:18px;max-width:700px;">The experience behind the reviews.</h2>
+          </div>
+          <p class="section-copy reveal delay-1">Public review descriptions mention a range of dental support at the practice. These are presented here as patient-reported highlights, not as a confirmed service catalogue.</p>
+        </div>
+
+        <div class="mentions-grid">
+          <article class="mention-card reveal">
+            <div class="mention-icon"><i data-lucide="sparkles"></i></div>
+            <h3>Dental Care</h3>
+            <p>Patients describe receiving direct, practical dental treatment and speak positively about the overall care experience.</p>
+          </article>
+          <article class="mention-card reveal delay-1">
+            <div class="mention-icon"><i data-lucide="scan-line"></i></div>
+            <h3>X-ray Support</h3>
+            <p>One public review specifically mentions an X-ray section as part of the practice experience.</p>
+          </article>
+          <article class="mention-card reveal delay-2">
+            <div class="mention-icon"><i data-lucide="droplets"></i></div>
+            <h3>Oral Hygiene</h3>
+            <p>Oral hygiene support is also mentioned by patients reviewing the practice online.</p>
+          </article>
+          <article class="mention-card reveal delay-3">
+            <div class="mention-icon"><i data-lucide="siren"></i></div>
+            <h3>Emergency Help</h3>
+            <p>A patient review highlights being assisted during a dental emergency and returning after a positive experience.</p>
+          </article>
+        </div>
+        <div class="source-note">Service availability should always be confirmed directly with the practice. Demo wording is based on public directory/review information available at the time of preparation.</div>
+      </div>
+    </section>
+
+    <section class="section-pad">
+      <div class="container">
+        <div class="section-head">
+          <div class="reveal">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> Patient Experience</div>
+            <h2 class="section-title" style="margin-top:18px;max-width:740px;">Clear, calm and easy to navigate.</h2>
+          </div>
+          <p class="section-copy reveal delay-1">A dental website should reduce friction before a patient even walks through the door: make contact details obvious, build trust quickly, and answer the essentials without clutter.</p>
+        </div>
+
+        <div class="experience-grid">
+          <article class="experience-card reveal">
+            <img src="https://images.unsplash.com/photo-1777331903190-341a3dd0441b?auto=format&fit=crop&q=82&w=1400" alt="Dentist speaking with a patient" loading="lazy" />
+            <div class="experience-copy">
+              <span>01 · Comfortable communication</span>
+              <h3>Put the patient at ease.</h3>
+              <p>A simple digital journey helps new patients understand where to go and how to reach the practice before their visit.</p>
+            </div>
+          </article>
+          <article class="experience-card reveal delay-1">
+            <img src="https://images.unsplash.com/photo-1685022036266-7db6e5161ee1?auto=format&fit=crop&q=82&w=1400" alt="Dental treatment taking place in a clinic" loading="lazy" />
+            <div class="experience-copy">
+              <span>02 · Professional presence</span>
+              <h3>Let reputation work online too.</h3>
+              <p>The practice already has positive public reviews. A dedicated website gives that reputation a professional home patients can return to.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" id="reviews" style="background:#f2f8f6;">
+      <div class="container">
+        <div class="section-head">
+          <div class="reveal">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> Patient Feedback</div>
+            <h2 class="section-title" style="margin-top:18px;">A reputation worth showing.</h2>
+          </div>
+          <p class="section-copy reveal delay-1">These short excerpts come from publicly visible review content. In a live website, the practice could replace these with approved patient testimonials or integrate its preferred review platform.</p>
+        </div>
+
+        <div class="review-layout">
+          <div class="review-score reveal">
+            <div>
+              <div class="score-num">5.0</div>
+              <div class="score-stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>
+              <p>Rating shown on the Cybo business listing when this concept was prepared.</p>
+            </div>
+            <p><strong style="color:#194c48">23 public reviews</strong><br>Public listing count; may change over time.</p>
+          </div>
+
+          <div class="review-stack">
+            <article class="review-card reveal delay-1">
+              <div class="quote">“I drive far for a dentist. But for Dr Snyman I drive it with a smile.”</div>
+              <div class="review-meta"><span>Public review excerpt</span><div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div></div>
+            </article>
+            <article class="review-card reveal delay-2">
+              <div class="quote">“They helped me in an emergency, were super friendly about it and fixed the problem.”</div>
+              <div class="review-meta"><span>Public review excerpt</span><div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div></div>
+            </article>
+            <article class="review-card reveal delay-3">
+              <div class="quote">“Super-great dental practice… all in one place.”</div>
+              <div class="review-meta"><span>Public review excerpt</span><div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" style="padding-bottom:40px;">
+      <div class="container">
+        <div class="cta-shell reveal">
+          <div>
+            <h2>Need to speak to the practice?</h2>
+            <p>For appointments, availability, emergency enquiries or to confirm a specific dental service, contact the practice directly.</p>
+          </div>
+          <div class="cta-actions">
+            <a class="btn-primary" href="tel:+27123351410"><i data-lucide="phone-call"></i> 012 335 1410</a>
+            <a class="btn-secondary" href="#contact"><i data-lucide="navigation"></i> View Location</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div class="reveal">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> Contact & Location</div>
+            <h2 class="section-title" style="margin-top:18px;">Easy to find. Easy to call.</h2>
+          </div>
+          <p class="section-copy reveal delay-1">This demo uses the practice’s publicly listed address and telephone number. Opening hours and email details are intentionally not shown because they were not reliably confirmed.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card reveal">
+            <h3>Dr PJN Snyman</h3>
+            <p>Dental practice in Eloffsdal, Pretoria.</p>
+
+            <div class="contact-list">
+              <div class="contact-item"><i data-lucide="map-pin"></i><div><b>Practice Address</b><span>518 Begemann Street, Eloffsdal, Pretoria, 0084</span></div></div>
+              <div class="contact-item"><i data-lucide="phone"></i><div><b>Telephone</b><span><a href="tel:+27123351410">012 335 1410</a></span></div></div>
+              <div class="contact-item"><i data-lucide="clock-3"></i><div><b>Opening Hours</b><span>Please call the practice to confirm current hours.</span></div></div>
+            </div>
+
+            <a class="btn-primary" style="width:100%" href="tel:+27123351410"><i data-lucide="phone-call"></i> Call Now</a>
+
+            <form class="contact-form" id="demoForm">
+              <div class="field-row">
+                <input type="text" placeholder="Your name" required />
+                <input type="tel" placeholder="Phone number" required />
+              </div>
+              <textarea placeholder="How can the practice help?"></textarea>
+              <button class="btn-secondary" type="submit"><i data-lucide="send"></i> Request a Call Back</button>
+              <small>Demo form only — it is intentionally not connected to the practice. A live version can send enquiries securely to an approved email address or booking workflow.</small>
+            </form>
+          </div>
+
+          <div class="map-card reveal delay-1">
+            <iframe title="Map showing 518 Begemann Street, Eloffsdal, Pretoria" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=518%20Begemann%20Street%2C%20Eloffsdal%2C%20Pretoria%2C%200084&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+            <div class="map-label"><b>518 Begemann Street</b><span>Eloffsdal · Pretoria · 0084</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad" style="padding-top:40px;">
+      <div class="container">
+        <div style="text-align:center;max-width:760px;margin:0 auto 30px" class="reveal">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> Quick Answers</div>
+          <h2 class="section-title" style="margin-top:18px;">Before you call.</h2>
+        </div>
+
+        <div class="faq reveal delay-1">
+          <div class="faq-item">
+            <button class="faq-btn">Where is the practice located?<i data-lucide="plus"></i></button>
+            <div class="faq-answer"><p>Public listings show the practice at 518 Begemann Street, Eloffsdal, Pretoria, 0084.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn">How do I make an appointment?<i data-lucide="plus"></i></button>
+            <div class="faq-answer"><p>Call the publicly listed practice number, 012 335 1410, to confirm appointments and availability.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn">Does the practice handle dental emergencies?<i data-lucide="plus"></i></button>
+            <div class="faq-answer"><p>A public patient review mentions receiving emergency assistance. Current emergency availability should still be confirmed directly with the practice.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-btn">Is this the official Dr PJN Snyman website?<i data-lucide="plus"></i></button>
+            <div class="faq-answer"><p>No. This is an unofficial demonstration website created by Nova J Systems to show how the practice could present its public information and reputation online.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand footer-brand">
+            <div class="brand-mark"><i data-lucide="badge-plus"></i></div>
+            <div><div class="brand-name">Dr PJN Snyman</div><div class="brand-sub">Unofficial Website Concept</div></div>
+          </div>
+          <div class="footer-copy">Public contact information is shown for demonstration purposes. Stock imagery is illustrative and does not depict Dr Snyman, the practice premises, staff, or actual patients.</div>
+        </div>
+        <div class="footer-links"><a href="#about">Practice</a><a href="#care">Patient Care</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a></div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Website concept. Not an official representation of the practice.</span>
+        <span class="nova-credit">Concept & development demo by <b>Nova J Systems</b>.</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">Demo form only — please call 012 335 1410 to contact the practice.</div>
+
+  <script>
+    lucide.createIcons();
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const nav = document.getElementById('nav');
+    const scrollProgress = document.getElementById('scrollProgress');
+    const navLinks = document.getElementById('navLinks');
+    const mobileToggle = document.getElementById('mobileToggle');
+    const heroMain = document.getElementById('heroMain');
+
+    function onScroll() {
+      const y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 35);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      scrollProgress.style.width = `${max > 0 ? (y / max) * 100 : 0}%`;
+
+      if (heroMain && window.innerWidth > 760) {
+        heroMain.style.transform = `translateY(${Math.min(y * 0.055, 26)}px)`;
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    document.addEventListener('pointermove', (e) => {
+      document.documentElement.style.setProperty('--mx', `${e.clientX}px`);
+      document.documentElement.style.setProperty('--my', `${e.clientY}px`);
+    });
+
+    mobileToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('mobile-open');
+      document.body.classList.toggle('menu-open', open);
+      mobileToggle.innerHTML = open ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+      lucide.createIcons();
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('mobile-open');
+      document.body.classList.remove('menu-open');
+      mobileToggle.innerHTML = '<i data-lucide="menu"></i>';
+      lucide.createIcons();
+    }));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal:not(.in)').forEach(el => observer.observe(el));
+
+    const counter = document.getElementById('reviewCounter');
+    let counterDone = false;
+    const counterObserver = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && !counterDone) {
+        counterDone = true;
+        const target = 23;
+        const duration = 1100;
+        const start = performance.now();
+        function tick(now) {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          counter.textContent = Math.round(target * eased);
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: .35 });
+    counterObserver.observe(counter);
+
+    document.querySelectorAll('.mention-card, .fact').forEach(card => {
+      card.addEventListener('pointermove', e => {
+        if (window.innerWidth < 900) return;
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - .5;
+        const y = (e.clientY - r.top) / r.height - .5;
+        card.style.transform = `perspective(700px) rotateY(${x * 3}deg) rotateX(${-y * 3}deg) translateY(-5px)`;
+      });
+      card.addEventListener('pointerleave', () => card.style.transform = '');
+    });
+
+    document.querySelectorAll('.faq-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const ans = item.querySelector('.faq-answer');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(other => {
+          other.classList.remove('open');
+          other.querySelector('.faq-answer').style.maxHeight = null;
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          ans.style.maxHeight = ans.scrollHeight + 'px';
+        }
+      });
+    });
+
+    const toast = document.getElementById('toast');
+    document.getElementById('demoForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3800);
+    });
+  </script>
+</body>
+</html>
